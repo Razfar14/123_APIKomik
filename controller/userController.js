@@ -42,7 +42,7 @@ async function login(req, res) {
 
         if (!email || !password) {
             return res.status(400).json
-                ({ error: 'Email and password dibutuhkan' });
+                ({ error: 'email dan password dibutuhkan' });
         }
         const user = await User.findOne({
             where: { email }
@@ -50,14 +50,14 @@ async function login(req, res) {
 
         if (!user) {
             return res.status(401).json({
-                error: 'Invalid email or password'
+                error: 'email atau password salah'
             });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).json({
-                error: 'Invalid email or password'
+                error: 'email atau password salah'
             });
         }
 
